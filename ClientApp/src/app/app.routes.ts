@@ -5,7 +5,8 @@ import { ChallengeListComponent } from './features/dashboard/challenge-list/chal
 import { ChallengeDetailComponent } from './features/challenge/challenge-detail/challenge-detail.component';
 import { ChallengeCreateComponent } from './features/challenge/challenge-create/challenge-create.component';
 import { ChallengeEditComponent } from './features/challenge/challenge-edit/challenge-edit.component';
-import { AuthGuard } from './core/guards/auth.guard'; // Assume generated class or functional
+import { AuthGuard } from './core/guards/auth.guard';
+import { ProfileComponent } from './features/profile/profile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
         component: ChallengeListComponent,
         canActivate: [AuthGuard]
     },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     {
         path: 'challenge/:id',
         component: ChallengeDetailComponent,

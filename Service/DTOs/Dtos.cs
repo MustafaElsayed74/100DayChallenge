@@ -73,4 +73,23 @@ namespace Service.DTOs
         public string GoalDescription { get; set; }
         public string Notes { get; set; }
     }
+
+    public class UpdateProfileDto
+    {
+        public string FullName { get; set; }
+        public string Avatar { get; set; }
+    }
+
+    public class ChangePasswordDto
+    {
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+    }
+
+    public class UserDetailDto
+    {
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Avatar { get; set; }
+    }
 }

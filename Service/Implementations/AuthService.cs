@@ -59,6 +59,52 @@ namespace Service.Implementations
             return await GenerateAuthResponseAsync(user);
         }
 
+        public async Task<UserDetailDto> GetProfileAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("User not found");
+
+            return new UserDetailDto
+            {
+                FullName = user.FullName,
+                Email = user.Email,
+                Avatar = user.Avatar
+            };
+        }
+
+        public async Task<UserDetailDto> UpdateProfileAsync(string userId, UpdateProfileDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("User not found");
+
+            user.FullName = dto.FullName;
+            user.Avatar = dto.Avatar;
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded) throw new Exception("Failed to update profile");
+
+            return new UserDetailDto
+            {
+                FullName = user.FullName,
+                Email = user.Email,
+                Avatar = user.Avatar
+            };
+        }
+
+        public async Task<bool> ChangePasswordAsync(string userId, ChangePasswordDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("User not found");
+
+            var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+            if (!result.Succeeded)
+            {
+                throw new Exception(string.Join(", ", result.Errors));
+            }
+
+            return true;
+        }
+
         private async Task<AuthResponseDto> GenerateAuthResponseAsync(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();

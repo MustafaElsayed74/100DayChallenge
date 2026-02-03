@@ -15,7 +15,11 @@ import { RouterModule } from '@angular/router';
         <button class="theme-btn" (click)="theme.toggleTheme()">
             {{ (theme.isDarkMode$ | async) ? '☀️' : '🌙' }}
         </button>
-        <span>{{ user.fullName }}</span>
+        <a routerLink="/profile" class="profile-link">
+            <img class="user-avatar" *ngIf="user.avatar" [src]="user.avatar" alt="Avatar">
+            <span class="user-avatar-placeholder" *ngIf="!user.avatar">👤</span>
+            <span class="user-name">{{ user.fullName }}</span>
+        </a>
         <button (click)="auth.logout()">Logout</button>
       </div>
     </nav>
@@ -41,6 +45,33 @@ import { RouterModule } from '@angular/router';
       gap: 1rem;
       align-items: center;
       color: var(--text-color);
+    }
+    .profile-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--text-color);
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+        
+        &:hover {
+            background-color: var(--bg-color);
+        }
+    }
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--highlight-color);
+    }
+    .user-avatar-placeholder {
+        font-size: 1.5rem;
+    }
+    .user-name {
+        font-weight: 500;
     }
     button {
       background: var(--input-bg);

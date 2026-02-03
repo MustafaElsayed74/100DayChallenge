@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 export interface User {
   email: string;
   fullName: string;
+  avatar?: string;
   token: string;
 }
 
@@ -41,6 +42,26 @@ export class AuthService {
     );
   }
 
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/me`);
+  }
+
+  updateProfile(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/me`, data).pipe(
+      tap((updatedData: any) => {
+        const currentUser = this.userSubject.value;
+        if (currentUser) {
+          const newUser = { ...currentUser, ...updatedData };
+          this.handleAuthSuccess(newUser);
+        }
+      })
+    );
+  }
+
+  changePassword(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/password`, data);
+  }
+
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -50,7 +71,11 @@ export class AuthService {
 
   private handleAuthSuccess(user: User) {
     localStorage.setItem('token', user.token);
-    localStorage.setItem('user', JSON.stringify({ email: user.email, fullName: user.fullName }));
+    localStorage.setItem('user', JSON.stringify({
+      email: user.email,
+      fullName: user.fullName,
+      avatar: user.avatar
+    }));
     this.userSubject.next(user);
   }
 

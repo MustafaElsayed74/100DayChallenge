@@ -10,3 +10,4 @@ H:\Antigravity\100DayHabitat\Core\obj\Debug\net9.0\Core.dll
 H:\Antigravity\100DayHabitat\Core\obj\Debug\net9.0\refint\Core.dll
 H:\Antigravity\100DayHabitat\Core\obj\Debug\net9.0\Core.pdb
 H:\Antigravity\100DayHabitat\Core\obj\Debug\net9.0\ref\Core.dll
+H:\Antigravity\100DayHabitat\Core\obj\Debug\net9.0\Core.sourcelink.json

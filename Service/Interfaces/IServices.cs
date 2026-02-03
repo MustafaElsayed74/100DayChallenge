@@ -8,6 +8,9 @@ namespace Service.Interfaces
     {
         Task<AuthResponseDto> RegisterAsync(RegisterDto dto);
         Task<AuthResponseDto> LoginAsync(LoginDto dto);
+        Task<UserDetailDto> GetProfileAsync(string userId);
+        Task<UserDetailDto> UpdateProfileAsync(string userId, UpdateProfileDto dto);
+        Task<bool> ChangePasswordAsync(string userId, ChangePasswordDto dto);
     }
 
     public interface IChallengeService

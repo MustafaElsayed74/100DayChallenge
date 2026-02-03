@@ -182,3 +182,4 @@ H:\Antigravity\100DayHabitat\API\bin\Debug\net9.0\API.pdb
 H:\Antigravity\100DayHabitat\API\obj\Debug\net9.0\API.csproj.Up2Date
 H:\Antigravity\100DayHabitat\API\obj\Debug\net9.0\API.genruntimeconfig.cache
 H:\Antigravity\100DayHabitat\API\obj\Debug\net9.0\ref\API.dll
+H:\Antigravity\100DayHabitat\API\obj\Debug\net9.0\API.sourcelink.json

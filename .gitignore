@@ -1,0 +1,33 @@
+# .NET Core
+bin/
+obj/
+*.user
+*.pdb
+*.suo
+.vs/
+*.dll
+*.exe
+
+# ASP.NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio Code
+.vscode/
+
+# Angular / Frontend
+ClientApp/node_modules/
+ClientApp/dist/
+ClientApp/.angular/
+ClientApp/.editorconfig
+ClientApp/npm-debug.log
+ClientApp/yarn-error.log
+
+# Logs
+*.log
+debug_log.txt
+
+# OS
+.DS_Store
+Thumbs.db

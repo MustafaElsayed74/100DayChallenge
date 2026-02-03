@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using Service.Implementations;
 using Service.Interfaces;
 using Service.Mappings;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -99,11 +100,14 @@ builder.Services.AddCors(options => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
