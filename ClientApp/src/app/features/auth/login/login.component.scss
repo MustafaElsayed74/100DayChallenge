@@ -71,6 +71,11 @@ $glass-blur: blur(12px);
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color);
 
+  @media (max-width: 600px) {
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
+
   // Glassmorphism overrides if supported or wanted
   background: rgba(var(--card-bg), 0.8); // Needs RGB conversion or just simple opacity if var isn't RGB
   background: var(--card-bg);

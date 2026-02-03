@@ -92,7 +92,7 @@ builder.Services.AddSwaggerGen(c => {
 // CORS
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular",
-        builder => builder.WithOrigins("http://localhost:4200")
+        builder => builder.WithOrigins("http://localhost:4200", "https://100-days-roan.vercel.app")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });

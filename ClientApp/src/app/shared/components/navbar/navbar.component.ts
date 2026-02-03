@@ -27,22 +27,31 @@ import { RouterModule } from '@angular/router';
   styles: [`
     .navbar {
       background: var(--card-bg);
-      padding: 1rem 2rem;
+      padding: 0.8rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border-color);
       transition: background-color 0.3s, border-color 0.3s;
     }
+    @media (max-width: 600px) {
+        .navbar {
+            padding: 0.8rem 1rem;
+        }
+        .logo {
+            font-size: 1rem;
+        }
+    }
     .logo {
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       cursor: pointer;
       color: var(--text-color);
+      text-decoration: none;
     }
     .user-info {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       align-items: center;
       color: var(--text-color);
     }
@@ -52,7 +61,7 @@ import { RouterModule } from '@angular/router';
         gap: 8px;
         text-decoration: none;
         color: var(--text-color);
-        padding: 0.5rem;
+        padding: 0.4rem;
         border-radius: 8px;
         transition: background-color 0.2s;
         
@@ -61,8 +70,8 @@ import { RouterModule } from '@angular/router';
         }
     }
     .user-avatar {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid var(--highlight-color);
@@ -73,6 +82,11 @@ import { RouterModule } from '@angular/router';
     .user-name {
         font-weight: 500;
     }
+    @media (max-width: 500px) {
+        .user-name {
+            display: none;
+        }
+    }
     button {
       background: var(--input-bg);
       border: 1px solid var(--border-color);
@@ -82,11 +96,12 @@ import { RouterModule } from '@angular/router';
       color: var(--text-color);
       transition: all 0.2s;
       font-family: inherit;
+      font-size: 0.9rem;
       &:hover { background: var(--bg-color); }
     }
     .theme-btn {
         font-size: 1.2rem;
-        padding: 0.3rem 0.8rem;
+        padding: 0.3rem 0.6rem;
         border: none;
         background: transparent;
         &:hover { background: rgba(0,0,0,0.05); }
