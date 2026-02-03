@@ -1,0 +1,17 @@
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Service.deps.json
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Service.dll
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Service.pdb
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Core.dll
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Infrastructure.dll
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Core.pdb
+H:\Antigravity\100DayHabitat\Service\bin\Debug\net9.0\Infrastructure.pdb
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.csproj.AssemblyReference.cache
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.AssemblyInfoInputs.cache
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.AssemblyInfo.cs
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.csproj.CoreCompileInputs.cache
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.csproj.Up2Date
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.dll
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\refint\Service.dll
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\Service.pdb
+H:\Antigravity\100DayHabitat\Service\obj\Debug\net9.0\ref\Service.dll

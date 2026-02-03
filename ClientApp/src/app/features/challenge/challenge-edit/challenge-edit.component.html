@@ -1,0 +1,34 @@
+<div class="create-container">
+    <div class="create-card">
+        <h2>Edit Challenge</h2>
+
+        <div *ngIf="loading">Loading...</div>
+
+        <form *ngIf="!loading" (ngSubmit)="onSubmit()" #challengeForm="ngForm">
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" [(ngModel)]="model.title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="goalDescription">Goal Description</label>
+                <textarea id="goalDescription" name="goalDescription" [(ngModel)]="model.goalDescription" required
+                    rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" [(ngModel)]="model.notes" rows="2"></textarea>
+            </div>
+
+            <div class="actions">
+                <button type="submit" [disabled]="!challengeForm.form.valid" class="submit-btn">
+                    Save Changes
+                </button>
+                <a [routerLink]="['/challenge', challengeId]" class="cancel-link">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>

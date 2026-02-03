@@ -1,0 +1,87 @@
+<div class="detail-container" *ngIf="challenge">
+    <div class="header">
+        <div class="title-section">
+            <h1>{{ challenge.title }}</h1>
+            <p>{{ challenge.goalDescription }}</p>
+            <div class="actions">
+                <button class="action-btn edit" [routerLink]="['/challenges/edit', challenge.id]">✎ Edit</button>
+                <button class="action-btn delete" (click)="deleteChallenge()">🗑 Delete</button>
+            </div>
+        </div>
+        <div class="stats-overview">
+            <div class="big-stat">
+                <span class="value">{{ (challenge.completedDays / days.length) * 100 | number:'1.0-0' }}%</span>
+                <span class="label">Complete</span>
+            </div>
+            <div class="big-stat highlight">
+                <span class="value">{{ challenge.currentStreak }}</span>
+                <span class="label">Day Streak</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div *ngFor="let day of days" class="day-circle" [ngClass]="getDayClass(day)" (click)="openDay(day)">
+            <span class="number">{{ day.dayNumber }}</span>
+            <span class="icon" *ngIf="day.status === 1">✓</span>
+            <span class="icon" *ngIf="day.status === 2">−</span>
+        </div>
+    </div>
+
+    <div class="legend">
+        <div class="item"><span class="dot pending"></span> Pending</div>
+        <div class="item"><span class="dot completed"></span> Completed</div>
+        <div class="item"><span class="dot skipped"></span> Skipped</div>
+        <div class="item"><span class="dot today"></span> Today</div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" *ngIf="selectedDay" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Day {{ selectedDay.dayNumber }}</h3>
+                <span class="date">{{ selectedDay.date | date:'fullDate' }}</span>
+                <button class="close-btn" (click)="closeModal()">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="status-options">
+                        <label [class.active]="modalStatus == DayStatus.Completed" class="option completed">
+                            <input type="radio" name="status" [value]="DayStatus.Completed" [(ngModel)]="modalStatus">
+                            Completed
+                        </label>
+                        <label [class.active]="modalStatus == DayStatus.Skipped" class="option skipped">
+                            <input type="radio" name="status" [value]="DayStatus.Skipped" [(ngModel)]="modalStatus">
+                            Skipped
+                        </label>
+                        <label [class.active]="modalStatus == DayStatus.Pending" class="option pending">
+                            <input type="radio" name="status" [value]="DayStatus.Pending" [(ngModel)]="modalStatus">
+                            Pending
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Note</label>
+                    <textarea [(ngModel)]="modalNote" placeholder="How did it go?"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="save-btn" (click)="saveDay()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="modal-overlay celebration-overlay" *ngIf="showCelebrationModal" (click)="closeModal()">
+        <div class="modal-content celebration-content" (click)="$event.stopPropagation()">
+            <h2>🎉 Congratulations! 🎉</h2>
+            <p>You have completed the <strong>{{ challenge?.title }}</strong> challenge!</p>
+            <p class="quote">"{{ celebrationQuote }}"</p>
+            <button class="save-btn" (click)="closeModal()">Awesome!</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  Core -> H:\Antigravity\100DayHabitat\Core\bin\Debug\net9.0\Core.dll
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(2,37): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft.AspNetCore.Identity' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(3,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Repositories\GenericRepository.cs(9,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(7,33): error CS0246: The type or namespace name 'IdentityDbContext<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(9,29): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(13,16): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(14,16): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(16,49): error CS0246: The type or namespace name 'ModelBuilder' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Repositories\GenericRepository.cs(16,28): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+
+Build FAILED.
+
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(2,37): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft.AspNetCore.Identity' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(3,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Repositories\GenericRepository.cs(9,17): error CS0234: The type or namespace name 'EntityFrameworkCore' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(7,33): error CS0246: The type or namespace name 'IdentityDbContext<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(9,29): error CS0246: The type or namespace name 'DbContextOptions<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(13,16): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(14,16): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Data\AppDbContext.cs(16,49): error CS0246: The type or namespace name 'ModelBuilder' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+H:\Antigravity\100DayHabitat\Infrastructure\Repositories\GenericRepository.cs(16,28): error CS0246: The type or namespace name 'DbSet<>' could not be found (are you missing a using directive or an assembly reference?) [H:\Antigravity\100DayHabitat\Infrastructure\Infrastructure.csproj]
+    0 Warning(s)
+    9 Error(s)
+
+Time Elapsed 00:00:01.86
