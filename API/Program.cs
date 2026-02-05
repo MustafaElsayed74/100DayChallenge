@@ -89,12 +89,14 @@ builder.Services.AddSwaggerGen(c => {
     }});
 });
 
-// CORS
+// CORS - Allow mobile apps and web clients
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular",
-        builder => builder.WithOrigins("http://localhost:4200", "https://100-days-roan.vercel.app", "http://localhost")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+        builder => builder
+            .SetIsOriginAllowed(_ => true)  // Allow any origin for Capacitor mobile apps
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
 
 var app = builder.Build();
