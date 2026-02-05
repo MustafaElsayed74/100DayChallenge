@@ -1,10 +1,10 @@
 # 100DayHabitat - 100 Day Challenge Tracker
 
-A full-stack habit tracking application designed to help users complete 100-day challenges with daily progress tracking, motivational features, and cross-platform support.
+A full-stack habit tracking web application designed to help users complete 100-day challenges with daily progress tracking and motivational features.
 
 ## 🎯 Overview
 
-**100DayHabitat** is a comprehensive challenge tracking system that allows users to create personal 100-day goals, track daily progress, maintain streaks, and celebrate milestones. The application features a modern Angular frontend with Capacitor for mobile deployment and an ASP.NET Core backend with JWT authentication.
+**100DayHabitat** is a comprehensive challenge tracking system that allows users to create personal 100-day goals, track daily progress, maintain streaks, and celebrate milestones. The application features a modern Angular frontend and an ASP.NET Core backend with JWT authentication.
 
 ## 🏗️ Architecture
 
@@ -12,7 +12,6 @@ A full-stack habit tracking application designed to help users complete 100-day 
 
 **Frontend:**
 - **Angular 20.3.3** - Modern standalone component architecture
-- **Capacitor** - Cross-platform mobile deployment (Android/iOS)
 - **TailwindCSS** - Utility-first styling
 - **RxJS** - Reactive state management
 - **canvas-confetti** - Celebration animations
@@ -36,8 +35,6 @@ A full-stack habit tracking application designed to help users complete 100-day 
 │   │   │   ├── shared/     # Shared components (navbar, etc.)
 │   │   │   └── app.routes.ts
 │   │   └── environments/   # Environment configurations
-│   ├── android/            # Capacitor Android project
-│   └── capacitor.config.ts
 ├── API/                    # ASP.NET Core Web API
 │   ├── Controllers/
 │   │   ├── AuthController.cs
@@ -136,7 +133,6 @@ A full-stack habit tracking application designed to help users complete 100-day 
 - **Node.js 18+** and npm
 - **SQL Server** (LocalDB or full instance)
 - **Angular CLI** (`npm install -g @angular/cli`)
-- **Capacitor CLI** (for mobile builds)
 
 ### Backend Setup
 
@@ -201,25 +197,6 @@ A full-stack habit tracking application designed to help users complete 100-day 
    ng serve
    ```
    App will be available at `http://localhost:4200`
-
-### Mobile Build (Android)
-
-1. **Build Angular app**
-   ```bash
-   ng build
-   ```
-
-2. **Sync Capacitor**
-   ```bash
-   npx cap sync android
-   ```
-
-3. **Open Android Studio**
-   ```bash
-   npx cap open android
-   ```
-
-4. **Run on device/emulator** from Android Studio
 
 ## 🔑 API Endpoints
 
@@ -315,16 +292,16 @@ Authorization: Bearer {token}
 
 - **JWT Bearer Authentication** - Stateless, secure token-based auth
 - **Password Hashing** - ASP.NET Core Identity with bcrypt
-- **CORS Configuration** - Configured for mobile and web clients
+- **CORS Configuration** - Configured for web clients
 - **Authorization Guards** - Protected routes and API endpoints
 - **Exception Middleware** - Global error handling with safe error messages
 
-## 📱 Mobile Features
+## 🔔 Notification Features
 
-- **Capacitor Integration** - Native mobile app capabilities
-- **Responsive Design** - Mobile-first TailwindCSS layouts
-- **Offline-Ready** (planned) - Service workers for offline functionality
-- **Push Notifications** (planned) - Daily reminders
+- **Browser Notifications** - Web notifications for reminders
+- **Missed Day Alerts** - Reminders when you haven't checked in today
+- **Encouragement Messages** - Periodic motivational notifications
+- **Configurable Settings** - Customize reminder time and frequency
 
 ## 🧪 Testing
 
