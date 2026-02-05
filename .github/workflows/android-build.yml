@@ -28,7 +28,7 @@ jobs:
 
       - name: Install Dependencies
         working-directory: ./ClientApp
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Build Angular App
         working-directory: ./ClientApp
