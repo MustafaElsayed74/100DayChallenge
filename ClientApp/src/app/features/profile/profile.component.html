@@ -64,5 +64,60 @@
                 </div>
             </form>
         </div>
+
+        <!-- Notification Settings Card -->
+        <div class="card notification-card">
+            <h2>🔔 Notifications</h2>
+
+            <div class="notification-toggle">
+                <div class="toggle-info">
+                    <span class="toggle-label">Enable Notifications</span>
+                    <span class="toggle-description">Get reminders for missed check-ins and encouragement</span>
+                </div>
+                <button class="toggle-btn" [class.active]="notificationsEnabled" (click)="toggleNotifications()"
+                    [disabled]="notificationPermission === 'denied'">
+                    <span class="toggle-slider"></span>
+                </button>
+            </div>
+
+            <div *ngIf="notificationPermission === 'denied'" class="permission-warning">
+                ⚠️ Notifications are blocked in your browser. Please update your browser settings to enable them.
+            </div>
+
+            <div *ngIf="notificationPermission === 'unsupported'" class="permission-warning">
+                ⚠️ Your browser doesn't support notifications.
+            </div>
+
+            <div class="notification-settings" *ngIf="notificationsEnabled && notificationPermission === 'granted'">
+                <div class="form-group">
+                    <label>Reminder Time</label>
+                    <select [(ngModel)]="reminderHour" (change)="saveNotificationSettings()">
+                        <option [value]="12">12:00 PM (Noon)</option>
+                        <option [value]="14">2:00 PM</option>
+                        <option [value]="16">4:00 PM</option>
+                        <option [value]="18">6:00 PM</option>
+                        <option [value]="20">8:00 PM</option>
+                    </select>
+                    <small>When to remind you about missed check-ins</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Encouragement Frequency</label>
+                    <select [(ngModel)]="encouragementInterval" (change)="saveNotificationSettings()">
+                        <option [value]="2">Every 2 hours</option>
+                        <option [value]="4">Every 4 hours</option>
+                        <option [value]="6">Every 6 hours</option>
+                        <option [value]="8">Every 8 hours</option>
+                    </select>
+                    <small>How often to send motivational messages</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" (click)="testNotification()">
+                        🔔 Test Notification
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

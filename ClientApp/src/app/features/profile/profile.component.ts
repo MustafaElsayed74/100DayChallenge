@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
+import { NotificationService, NotificationSettings } from '../../core/services/notification.service';
 import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule, CommonModule, FormsModule],
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })
@@ -16,6 +17,12 @@ export class ProfileComponent implements OnInit {
     passwordForm: FormGroup;
     loading = false;
     successMessage = '';
+
+    // Notification settings
+    notificationsEnabled = false;
+    notificationPermission: NotificationPermission | 'unsupported' = 'default';
+    reminderHour = 18;
+    encouragementInterval = 4;
     errorMessage = '';
 
     avatars = [
@@ -28,7 +35,8 @@ export class ProfileComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private notificationService: NotificationService
     ) {
         this.profileForm = this.fb.group({
             fullName: ['', Validators.required],
@@ -43,6 +51,45 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit() {
         this.loadProfile();
+        this.loadNotificationSettings();
+    }
+
+    loadNotificationSettings() {
+        this.notificationPermission = this.notificationService.getPermissionStatus();
+        const settings = this.notificationService.getSettings();
+        this.notificationsEnabled = settings.enabled;
+        this.reminderHour = settings.reminderHour;
+        this.encouragementInterval = settings.encouragementIntervalHours;
+    }
+
+    async toggleNotifications() {
+        const newState = !this.notificationsEnabled;
+        const success = await this.notificationService.setEnabled(newState);
+        if (success) {
+            this.notificationsEnabled = newState;
+            this.notificationPermission = this.notificationService.getPermissionStatus();
+            this.successMessage = newState ? 'Notifications enabled!' : 'Notifications disabled';
+        } else {
+            this.errorMessage = 'Could not enable notifications. Please allow notifications in your browser.';
+        }
+    }
+
+    saveNotificationSettings() {
+        const settings: NotificationSettings = {
+            enabled: this.notificationsEnabled,
+            reminderHour: this.reminderHour,
+            encouragementIntervalHours: this.encouragementInterval,
+            lastEncouragementTime: this.notificationService.getSettings().lastEncouragementTime
+        };
+        this.notificationService.saveSettings(settings);
+        this.successMessage = 'Notification settings saved!';
+    }
+
+    async testNotification() {
+        const success = await this.notificationService.testNotification();
+        if (!success) {
+            this.errorMessage = 'Could not send test notification. Please check browser permissions.';
+        }
     }
 
     loadProfile() {

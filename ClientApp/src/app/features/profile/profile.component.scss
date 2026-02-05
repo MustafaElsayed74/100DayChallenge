@@ -229,3 +229,116 @@ button[type="submit"] {
         transform: translateY(0);
     }
 }
+
+// Notification Settings Styles
+.notification-card {
+    h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+.notification-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-color);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+
+    .toggle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .toggle-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .toggle-description {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+    }
+
+    .toggle-btn {
+        position: relative;
+        width: 56px;
+        height: 30px;
+        background: var(--border-color);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        &.active {
+            background: var(--primary-color);
+
+            .toggle-slider {
+                left: 29px;
+            }
+        }
+    }
+}
+
+.permission-warning {
+    background: rgba(255, 193, 7, 0.15);
+    color: #e6a700;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.notification-settings {
+    animation: fadeIn 0.3s ease-out;
+
+    .form-group {
+        select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: var(--highlight-color);
+            }
+        }
+    }
+
+    .form-actions {
+        margin-top: 1.5rem;
+
+        button {
+            width: 100%;
+        }
+    }
+}
