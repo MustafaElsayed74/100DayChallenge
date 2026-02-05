@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -34,7 +35,7 @@ export enum DayStatus {
     providedIn: 'root'
 })
 export class ChallengeService {
-    private apiUrl = '/api/challenge';
+    private apiUrl = `${environment.apiUrl}/challenge`;
 
     constructor(private http: HttpClient) { }
 
