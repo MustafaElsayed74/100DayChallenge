@@ -25,9 +25,14 @@ export class RegisterComponent {
 
     onSubmit() {
         if (this.registerForm.valid) {
+            this.error = 'Submitting...';
             this.auth.register(this.registerForm.value).subscribe({
                 next: () => this.router.navigate(['/dashboard']),
-                error: (err) => this.error = err.error?.message || 'Registration failed.'
+                error: (err) => {
+                    console.error('Registration error:', err);
+                    // Show detailed error for debugging
+                    this.error = `Error: ${err.status} - ${err.statusText}\n${JSON.stringify(err.error, null, 2)}`;
+                }
             });
         }
     }

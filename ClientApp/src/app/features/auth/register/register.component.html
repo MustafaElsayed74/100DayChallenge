@@ -28,8 +28,9 @@
                 <label for="password">Password (Min 6 chars)</label>
             </div>
 
-            <div class="error-message" *ngIf="error">
-                <span class="icon">!</span> {{ error }}
+            <div class="error-message" *ngIf="error"
+                style="white-space: pre-wrap; word-break: break-word; text-align: left; font-size: 12px;">
+                {{ error }}
             </div>
 
             <button type="submit" class="submit-btn" [disabled]="!registerForm.valid">
