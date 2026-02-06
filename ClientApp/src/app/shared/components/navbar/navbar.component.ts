@@ -11,8 +11,8 @@ import { RouterModule } from '@angular/router';
     template: `
     <nav class="navbar" *ngIf="auth.user$ | async as user">
       <div class="logo-section" routerLink="/dashboard">
-          <span class="logo-icon">🎯</span>
-          <span class="logo-text">100 Day Challenge</span>
+          <img src="assets/icon.svg" alt="DayStreaker Logo" class="logo-img">
+          <span class="logo-text">DayStreaker</span>
       </div>
       
       <div class="nav-links">
@@ -44,10 +44,10 @@ import { RouterModule } from '@angular/router';
         cursor: pointer;
         text-decoration: none;
         
-        .logo-icon {
-            font-size: 1.8rem;
-            /* If we can filter the emoji to be pink? Or just use emoji for now */
-            /* filter: hue-rotate(...) */
+        .logo-img {
+            height: 32px;
+            width: 32px;
+            /* No filter needed for SVG as it has its own colors */
         }
         
         .logo-text {
