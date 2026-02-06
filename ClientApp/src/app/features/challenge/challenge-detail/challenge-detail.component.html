@@ -16,29 +16,47 @@
         </div>
 
         <div class="stats-grid">
-            <div class="stat-card">
-                <span class="value">{{ (challenge.completedDays / days.length) * 100 | number:'1.0-0' }}%</span>
-                <span class="label">Completed</span>
+            <div class="stat-card completed">
+                <div class="icon-bg">🎯</div>
+                <div class="stat-content">
+                    <span class="value">{{ (challenge.completedDays / days.length) * 100 | number:'1.0-0' }}%</span>
+                    <span class="label">Completed</span>
+                </div>
             </div>
-            <div class="stat-card highlight">
-                <span class="value">🔥 {{ challenge.currentStreak }}</span>
-                <span class="label">Current Streak</span>
+            <div class="stat-card streak highlight">
+                <div class="icon-bg">🔥</div>
+                <div class="stat-content">
+                    <span class="value">{{ challenge.currentStreak }}</span>
+                    <span class="label">Current Streak</span>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="value">{{ bestStreak }}</span>
-                <span class="label">Best Streak</span>
+            <div class="stat-card best">
+                <div class="icon-bg">🏆</div>
+                <div class="stat-content">
+                    <span class="value">{{ bestStreak }}</span>
+                    <span class="label">Best Streak</span>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="value">{{ challenge.completedDays }}</span>
-                <span class="label">Done</span>
+            <div class="stat-card done">
+                <div class="icon-bg">✅</div>
+                <div class="stat-content">
+                    <span class="value">{{ challenge.completedDays }}</span>
+                    <span class="label">Days Done</span>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="value">{{ daysSkipped }}</span>
-                <span class="label">Skipped</span>
+            <div class="stat-card skipped">
+                <div class="icon-bg">⏭️</div>
+                <div class="stat-content">
+                    <span class="value">{{ daysSkipped }}</span>
+                    <span class="label">Skipped</span>
+                </div>
             </div>
-            <div class="stat-card">
-                <span class="value">{{ daysRemaining }}</span>
-                <span class="label">Remaining</span>
+            <div class="stat-card remaining">
+                <div class="icon-bg">⏳</div>
+                <div class="stat-content">
+                    <span class="value">{{ daysRemaining }}</span>
+                    <span class="label">Remaining</span>
+                </div>
             </div>
         </div>
     </div>
