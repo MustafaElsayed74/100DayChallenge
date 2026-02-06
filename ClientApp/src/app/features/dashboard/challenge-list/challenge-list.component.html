@@ -8,7 +8,7 @@
         <div *ngFor="let challenge of challenges" class="challenge-card" [routerLink]="['/challenge', challenge.id]">
             <div class="card-header">
                 <h3>{{ challenge.title }}</h3>
-                <span class="dates">{{ challenge.startDate | date }} - {{ challenge.endDate | date }}</span>
+                <span class="badge active">Active</span>
             </div>
 
             <p class="description">{{ challenge.goalDescription }}</p>

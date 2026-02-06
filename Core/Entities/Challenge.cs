@@ -15,5 +15,6 @@ namespace Core.Entities
         public string Notes { get; set; }
         
         public ICollection<ChallengeDay> Days { get; set; }
+        public ICollection<ChallengeViewer> Viewers { get; set; }
     }
 }

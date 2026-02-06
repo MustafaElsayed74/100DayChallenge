@@ -63,7 +63,7 @@ namespace Service.Implementations
             // Let's rely on the fact that for this simple app, we might just load them.
             
             var challenges = await _unitOfWork.Repository<Challenge>()
-                .GetWithIncludesAsync(c => c.UserId == userId, "Days");
+                .GetWithIncludesAsync(c => c.UserId == userId || c.Viewers.Any(v => v.UserId == userId), "Days");
             
             var dtos = _mapper.Map<List<ChallengeDto>>(challenges);
 
@@ -83,7 +83,18 @@ namespace Service.Implementations
         public async Task<ChallengeDetailDto> GetChallengeAsync(int id, string userId)
         {
             var challenge = await _unitOfWork.Repository<Challenge>().GetByIdAsync(id);
-            if (challenge == null || challenge.UserId != userId) return null;
+            if (challenge == null) return null;
+
+            // Check Access: Owner OR Viewer
+            bool isOwner = challenge.UserId == userId;
+            bool isViewer = false;
+            if (!isOwner)
+            {
+                var viewers = await _unitOfWork.Repository<ChallengeViewer>().GetAsync(cv => cv.ChallengeId == id && cv.UserId == userId);
+                isViewer = viewers.Any();
+            }
+
+            if (!isOwner && !isViewer) return null;
 
             // Manual load of days if lazy loading isn't on (it's not by default in Core without proxies)
             // We need a way to include days.
@@ -98,38 +109,73 @@ namespace Service.Implementations
             // Calculate Stats
             CalculateStats(dto, (List<ChallengeDay>)days);
 
+            // Add viewer info to DTO if needed? Or just let frontend know mode.
+            // Maybe add "IsReadOnly" property to DTO? For now, frontend can check ownerId vs currentUserId.
+            // Dto usually has OwnerId? Not currently in ChallengeDto.
+            // But Challenge returns UserId? 
+            // The Entity has UserId. Dto mapping might include it.
+            // Let's assume frontend can infer, or we add logic later.
+
             return dto;
         }
 
-        public async Task<ChallengeDayDto> UpdateDayAsync(int challengeId, int dayNumber, string userId, UpdateDayDto dto)
+        public async Task AddViewerAsync(int challengeId, string ownerId, string viewerId)
         {
             var challenge = await _unitOfWork.Repository<Challenge>().GetByIdAsync(challengeId);
-            if (challenge == null || challenge.UserId != userId) throw new Exception("Challenge not found");
+            if (challenge == null || challenge.UserId != ownerId) throw new Exception("Challenge not found or unauthorized");
 
-            // Find Day
-            // Since Composite Keys/Indexing, we can query directly
-            var days = await _unitOfWork.Repository<ChallengeDay>()
-                .GetAsync(d => d.ChallengeId == challengeId && d.DayNumber == dayNumber);
+            // Check if already viewer
+             var existing = await _unitOfWork.Repository<ChallengeViewer>().GetAsync(cv => cv.ChallengeId == challengeId && cv.UserId == viewerId);
+             if (existing.Any()) return; // Already added
+
+             var viewer = new ChallengeViewer
+             {
+                 ChallengeId = challengeId,
+                 UserId = viewerId
+             };
+
+             await _unitOfWork.Repository<ChallengeViewer>().AddAsync(viewer);
+             await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task RemoveViewerAsync(int challengeId, string ownerId, string viewerId)
+        {
+            var challenge = await _unitOfWork.Repository<Challenge>().GetByIdAsync(challengeId);
+            if (challenge == null || challenge.UserId != ownerId) throw new Exception("Challenge not found or unauthorized");
+
+            var viewers = await _unitOfWork.Repository<ChallengeViewer>().GetAsync(cv => cv.ChallengeId == challengeId && cv.UserId == viewerId);
+            var viewer = viewers.FirstOrDefault();
             
-            var day = days.FirstOrDefault();
-            if (day == null) throw new Exception("Day not found");
-
-            // Update
-            day.Status = dto.Status;
-            day.Note = dto.Note;
-            if (dto.Status == DayStatus.Completed)
+            if (viewer != null)
             {
-                day.CompletedAt = DateTime.UtcNow;
+                _unitOfWork.Repository<ChallengeViewer>().Delete(viewer);
+                await _unitOfWork.CompleteAsync();
             }
-            else
+        }
+
+        public async Task<List<UserSummaryDto>> GetChallengeViewersAsync(int challengeId, string userId)
+        {
+            var challenge = await _unitOfWork.Repository<Challenge>().GetByIdAsync(challengeId);
+            // Allow owner and maybe viewers to see who else is viewing? Restrict to owner for now.
+            if (challenge == null) return new List<UserSummaryDto>();
+            
+            // Allow owner to see viewers. Viewers generally don't need to see other viewers list, but maybe?
+            // Let's allow owner and viewers to see list.
+            bool isOwner = challenge.UserId == userId;
+             var viewerRecords = await _unitOfWork.Repository<ChallengeViewer>()
+                 .GetWithIncludesAsync(cv => cv.ChallengeId == challengeId, "User");
+            
+            bool isViewer = viewerRecords.Any(cv => cv.UserId == userId);
+            
+            if (!isOwner && !isViewer) throw new Exception("Unauthorized");
+
+            return viewerRecords.Select(cv => new UserSummaryDto
             {
-                day.CompletedAt = null;
-            }
-
-            _unitOfWork.Repository<ChallengeDay>().Update(day);
-            await _unitOfWork.CompleteAsync();
-
-            return _mapper.Map<ChallengeDayDto>(day);
+                UserId = cv.UserId,
+                FullName = cv.User.FullName ?? cv.User.UserName,
+                Avatar = cv.User.Avatar,
+                Email = cv.User.Email
+            }).ToList();
         }
 
         public async Task DeleteChallengeAsync(int id, string userId)
@@ -180,6 +226,36 @@ namespace Service.Implementations
             await _unitOfWork.CompleteAsync();
 
             return _mapper.Map<ChallengeDto>(challenge);
+        }
+
+        public async Task<ChallengeDayDto> UpdateDayAsync(int challengeId, int dayNumber, string userId, UpdateDayDto dto)
+        {
+            var challenge = await _unitOfWork.Repository<Challenge>().GetByIdAsync(challengeId);
+            if (challenge == null || challenge.UserId != userId) throw new Exception("Challenge not found or unauthorized");
+
+            // We need to fetch the specific day. 
+            // Assuming we can query by ChallengeId and DayNumber.
+            var days = await _unitOfWork.Repository<ChallengeDay>().GetAsync(d => d.ChallengeId == challengeId && d.DayNumber == dayNumber);
+            var day = days.FirstOrDefault();
+
+            if (day == null) throw new Exception("Day not found");
+
+            day.Status = dto.Status;
+            day.Note = dto.Note;
+            
+            if (day.Status == DayStatus.Completed)
+            {
+                day.CompletedAt = DateTime.UtcNow; // Or keep existing if already set? Let's update it.
+            }
+            else
+            {
+                day.CompletedAt = null;
+            }
+
+            _unitOfWork.Repository<ChallengeDay>().Update(day);
+            await _unitOfWork.CompleteAsync();
+
+            return _mapper.Map<ChallengeDayDto>(day);
         }
 
         private void CalculateStats(ChallengeDto dto, List<ChallengeDay> days)

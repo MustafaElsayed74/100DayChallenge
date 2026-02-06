@@ -9,6 +9,7 @@ export interface User {
   fullName: string;
   avatar?: string;
   token: string;
+  userId: string;
 }
 
 @Injectable({
@@ -75,7 +76,8 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify({
       email: user.email,
       fullName: user.fullName,
-      avatar: user.avatar
+      avatar: user.avatar,
+      userId: user.userId
     }));
     this.userSubject.next(user);
   }

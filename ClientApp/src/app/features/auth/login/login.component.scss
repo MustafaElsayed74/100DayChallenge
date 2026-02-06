@@ -71,23 +71,22 @@ $glass-blur: blur(12px);
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color);
 
+  // Glassmorphism overrides if supported or wanted
+  background: rgba(var(--card-bg), 0.8);
+  background: var(--card-bg);
+  /* Fallback */
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   @media (max-width: 600px) {
     padding: 2rem 1.5rem;
     max-width: 90%;
   }
 
-  // Glassmorphism overrides if supported or wanted
-  background: rgba(var(--card-bg), 0.8); // Needs RGB conversion or just simple opacity if var isn't RGB
-  background: var(--card-bg);
-  /* Fallback */
-
   /* We use a pseudo-glass effect compatible with themes */
   @media (min-width: 768px) {
     backdrop-filter: blur(10px);
   }
-
-  transition: transform 0.3s ease,
-  box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);

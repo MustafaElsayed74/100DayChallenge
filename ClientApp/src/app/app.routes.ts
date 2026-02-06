@@ -11,6 +11,12 @@ import { ProfileComponent } from './features/profile/profile.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'register', component: RegisterComponent },
+    {
+        path: 'friends',
+        loadComponent: () => import('./features/friends/friends.component').then(m => m.FriendsComponent),
+        canActivate: [AuthGuard]
+    },
     {
         path: 'dashboard',
         component: ChallengeListComponent,

@@ -14,6 +14,7 @@ export interface Challenge {
     skippedDays: number;
     currentStreak: number;
     days?: ChallengeDay[];
+    ownerId?: string;
 }
 
 export interface ChallengeDay {
@@ -61,5 +62,17 @@ export class ChallengeService {
 
     updateChallenge(id: number, data: any): Observable<Challenge> {
         return this.http.put<Challenge>(`${this.apiUrl}/${id}`, data);
+    }
+
+    addViewer(id: number, viewerId: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/${id}/viewers/${viewerId}`, {});
+    }
+
+    removeViewer(id: number, viewerId: string): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/${id}/viewers/${viewerId}`);
+    }
+
+    getViewers(id: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/${id}/viewers`);
     }
 }

@@ -1,0 +1,108 @@
+<div class="friends-container p-6">
+    <div class="tabs-header">
+        <button (click)="activeTab = 'my-friends'" class="tab-btn" [class.active]="activeTab === 'my-friends'">
+            My Friends
+        </button>
+        <button (click)="activeTab = 'find-friends'" class="tab-btn" [class.active]="activeTab === 'find-friends'">
+            Find Friends
+        </button>
+    </div>
+
+    <!-- My Friends Tab -->
+    <div *ngIf="activeTab === 'my-friends'" class="animate-fade-in">
+        <!-- Pending Requests Section -->
+        <div *ngIf="pendingRequests.length > 0" class="section">
+            <h3 class="section-title">Pending Requests</h3>
+            <div class="friends-grid">
+                <div *ngFor="let req of pendingRequests" class="friend-card pending">
+                    <div class="card-content">
+                        <div class="avatar-container">
+                            <img *ngIf="req.requesterAvatar" [src]="req.requesterAvatar" class="avatar-img">
+                            <span *ngIf="!req.requesterAvatar" class="avatar-placeholder">👤</span>
+                        </div>
+                        <div class="info">
+                            <p class="name">{{ req.requesterName || req.requesterUserName }}</p>
+                            <p class="username">@{{ req.requesterUserName }}</p>
+                            <p class="date">Sent {{ req.sentOn | date }}</p>
+                        </div>
+                    </div>
+                    <div class="request-actions">
+                        <button (click)="acceptRequest(req.id)" class="btn-icon accept" title="Accept">
+                            ✅ Accepted
+                        </button>
+                        <button (click)="declineRequest(req.id)" class="btn-icon decline" title="Decline">
+                            ❌ Decline
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Friends List -->
+        <div class="section">
+            <h3 class="section-title">Your Friends ({{friends.length}})</h3>
+            <div *ngIf="friends.length === 0" class="empty-state">
+                <p>You assume the lonely path... for now. Add some friends!</p>
+            </div>
+
+            <div class="friends-grid">
+                <div *ngFor="let friend of friends" class="friend-card">
+                    <div class="card-content">
+                        <div class="avatar-container">
+                            <img *ngIf="friend.avatar" [src]="friend.avatar" class="avatar-img">
+                            <span *ngIf="!friend.avatar" class="avatar-placeholder">
+                                {{ friend.fullName ? friend.fullName.charAt(0) : friend.userName.charAt(0) }}
+                            </span>
+                        </div>
+                        <div class="info">
+                            <p class="name">{{ friend.fullName || friend.userName }}</p>
+                            <p class="username">@{{ friend.userName }}</p>
+                            <p class="date">Friend since {{ friend.becameFriendsOn | date:'mediumDate' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Find Friends Tab -->
+    <div *ngIf="activeTab === 'find-friends'" class="animate-fade-in">
+        <div class="search-container">
+            <input [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" type="text"
+                placeholder="Search by username or email..." class="search-input">
+            <button (click)="onSearch()" [disabled]="isSearching" class="btn btn-primary search-btn">
+                {{ isSearching ? 'Searching...' : 'Search' }}
+            </button>
+        </div>
+
+        <div *ngIf="searchResults.length > 0" class="friends-grid">
+            <div *ngFor="let user of searchResults" class="friend-card">
+                <div class="card-content">
+                    <div class="avatar-container">
+                        <img *ngIf="user.avatar" [src]="user.avatar" class="avatar-img">
+                        <span *ngIf="!user.avatar" class="avatar-placeholder">
+                            {{ user.fullName ? user.fullName.charAt(0) : user.userName.charAt(0) }}
+                        </span>
+                    </div>
+                    <div class="info">
+                        <p class="name">{{ user.fullName || user.userName }}</p>
+                        <p class="username">@{{ user.userName }}</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <span *ngIf="user.isFriend" class="badge friend">Friends</span>
+                    <span *ngIf="user.hasPendingRequest" class="badge pending">Pending</span>
+                    <button *ngIf="!user.isFriend && !user.hasPendingRequest" (click)="sendRequest(user.email)"
+                        class="btn-add">
+                        Add Friend
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="searchResults.length === 0 && searchQuery && !isSearching" class="no-results">
+            No users found matching "{{searchQuery}}".
+        </div>
+    </div>
+</div>

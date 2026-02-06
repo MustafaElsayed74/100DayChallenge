@@ -1,0 +1,164 @@
+
+> client-app@0.0.0 build
+> ng build
+
+[33mΓ¥»[39m Building...
+[32mΓ£ö[39m Building...
+[1mInitial chunk files[22m  [2m | [22m[1mNames[22m            [2m | [22m [1mRaw size[22m[2m | [22m[1mEstimated transfer size[22m
+[32mchunk-M3DRUTDA.js[39m    [2m | [22m[2m-[22m                [2m | [22m[36m227.10 kB[39m[2m | [22m               [36m60.62 kB[39m
+[32mmain-Z4HAXRHK.js[39m     [2m | [22m[2mmain[22m             [2m | [22m[36m179.22 kB[39m[2m | [22m               [36m40.24 kB[39m
+[32mpolyfills-5CFQRCPP.js[39m[2m | [22m[2mpolyfills[22m        [2m | [22m [36m34.59 kB[39m[2m | [22m               [36m11.33 kB[39m
+[32mstyles-PM77FZLA.css[39m  [2m | [22m[2mstyles[22m           [2m | [22m  [36m4.20 kB[39m[2m | [22m              [36m553 bytes[39m
+
+[1m [22m                    [2m | [22m[1mInitial total[22m    [2m | [22m[1m445.11 kB[22m[2m | [22m              [1m112.76 kB[22m
+
+[1mLazy chunk files[22m     [2m | [22m[1mNames[22m            [2m | [22m [1mRaw size[22m[2m | [22m[1mEstimated transfer size[22m
+[32mchunk-47F7V4QC.js[39m    [2m | [22m[2mfriends-component[22m[2m | [22m [36m10.07 kB[39m[2m | [22m                [36m2.74 kB[39m
+
+Application bundle generation complete. [6.886 seconds] - 2026-02-05T23:29:03.267Z
+
+Γû▓ [WARNING] NG8107: The left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator. [plugin angular-compiler]
+
+    src/app/features/challenge/challenge-detail/challenge-detail.component.html:83:60:
+      83 Γöé ...mpleted the <strong>{{ challenge?.title }}</strong> challenge!</p>
+         Γò╡                                      ~~~~~
+
+  Warning occurs in the template of component ChallengeDetailComponent.
+
+    src/app/features/challenge/challenge-detail/challenge-detail.component.ts:13:17:
+      13 Γöé     templateUrl: './challenge-detail.component.html',
+         Γò╡                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/login/login.component.scss:80:2:
+      80 Γöé   background: rgba(var(--card-bg), 0.8); // Needs RGB conversion o...
+         Γò╡   ^
+
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/login/login.component.scss:81:2:
+      81 Γöé   background: var(--card-bg);
+         Γò╡   ^
+
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/login/login.component.scss:89:2:
+      89 Γöé   transition: transform 0.3s ease,
+         Γò╡   ^
+
+  box-shadow 0.3s ease;
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/login/login.component.scss:89:2:
+      89 Γöé   transition: transform 0.3s ease,
+         Γò╡   ^
+
+  box-shadow 0.3s ease;
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/register/register.component.scss:80:4:
+      80 Γöé     background: var(--card-bg);
+         Γò╡     ^
+
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/register/register.component.scss:82:4:
+      82 Γöé     background: color-mix(in srgb, var(--card-bg), transparent 10%...
+         Γò╡     ^
+
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/register/register.component.scss:88:4:
+      88 Γöé     transition: transform 0.3s ease,
+         Γò╡     ^
+
+    box-shadow 0.3s ease;
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] Deprecation [plugin angular-sass]
+
+    src/app/features/auth/register/register.component.scss:88:4:
+      88 Γöé     transition: transform 0.3s ease,
+         Γò╡     ^
+
+    box-shadow 0.3s ease;
+
+  Sass's behavior for declarations that appear after nested
+  rules will be changing to match the behavior specified by CSS in an upcoming
+  version. To keep the existing behavior, move the declaration above the nested
+  rule. To opt into the new behavior, wrap the declaration in `& {}`.
+  
+  More info: https://sass-lang.com/d/mixed-decls
+
+
+Γû▓ [WARNING] src/app/features/challenge/challenge-detail/challenge-detail.component.scss exceeded maximum budget. Budget 4.00 kB was not met by 1.71 kB with a total of 5.71 kB.
+
+
+Γû▓ [WARNING] src/app/features/profile/profile.component.scss exceeded maximum budget. Budget 4.00 kB was not met by 994 bytes with a total of 4.99 kB.
+
+
+Output location: H:\Antigravity\100DayHabitat\ClientApp\dist\ClientApp
+

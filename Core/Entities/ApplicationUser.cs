@@ -8,5 +8,8 @@ namespace Core.Entities
         public string FullName { get; set; }
         public string? Avatar { get; set; }
         public ICollection<Challenge> Challenges { get; set; }
+        public ICollection<Friendship> SentFriendRequests { get; set; }
+        public ICollection<Friendship> ReceivedFriendRequests { get; set; }
+        public ICollection<ChallengeViewer> ViewableChallenges { get; set; }
     }
 }

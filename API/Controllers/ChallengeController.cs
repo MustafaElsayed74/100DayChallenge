@@ -103,5 +103,46 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("{id}/viewers/{viewerId}")]
+        public async Task<IActionResult> AddViewer(int id, string viewerId)
+        {
+            try
+            {
+                await _challengeService.AddViewerAsync(id, GetUserId(), viewerId);
+                return Ok(new { message = "Viewer added." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}/viewers/{viewerId}")]
+        public async Task<IActionResult> RemoveViewer(int id, string viewerId)
+        {
+            try
+            {
+                await _challengeService.RemoveViewerAsync(id, GetUserId(), viewerId);
+                return Ok(new { message = "Viewer removed." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/viewers")]
+        public async Task<IActionResult> GetViewers(int id)
+        {
+            try
+            {
+                var viewers = await _challengeService.GetChallengeViewersAsync(id, GetUserId());
+                return Ok(viewers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

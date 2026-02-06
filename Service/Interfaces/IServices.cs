@@ -21,5 +21,17 @@ namespace Service.Interfaces
         Task<ChallengeDto> UpdateChallengeAsync(int id, string userId, UpdateChallengeDto dto);
         Task<ChallengeDayDto> UpdateDayAsync(int challengeId, int dayNumber, string userId, UpdateDayDto dto);
         Task DeleteChallengeAsync(int id, string userId);
+        Task AddViewerAsync(int challengeId, string ownerId, string viewerId);
+        Task RemoveViewerAsync(int challengeId, string ownerId, string viewerId);
+        Task<List<UserSummaryDto>> GetChallengeViewersAsync(int challengeId, string userId);
+    }
+    public interface IFriendService
+    {
+        Task SendRequestAsync(string requesterId, string addresseeEmail);
+        Task AcceptRequestAsync(int requestId, string userId);
+        Task DeclineRequestAsync(int requestId, string userId);
+        Task<List<FriendDto>> GetFriendsAsync(string userId);
+        Task<List<FriendRequestDto>> GetPendingRequestsAsync(string userId);
+        Task<List<UserSummaryDto>> SearchUsersAsync(string query, string currentUserId);
     }
 }

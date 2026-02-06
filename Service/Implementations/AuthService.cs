@@ -130,7 +130,8 @@ namespace Service.Implementations
             {
                 Token = tokenHandler.WriteToken(token),
                 Email = user.Email,
-                FullName = user.FullName
+                FullName = user.FullName,
+                UserId = user.Id
             };
         }
     }

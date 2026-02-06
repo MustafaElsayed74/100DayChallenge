@@ -22,6 +22,7 @@ namespace Service.DTOs
         public string Token { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
+        public string UserId { get; set; }
     }
 
     public class CreateChallengeDto
@@ -45,6 +46,7 @@ namespace Service.DTOs
         public int CompletedDays { get; set; }
         public int SkippedDays { get; set; }
         public int CurrentStreak { get; set; }
+        public string OwnerId { get; set; }
     }
 
     public class ChallengeDetailDto : ChallengeDto

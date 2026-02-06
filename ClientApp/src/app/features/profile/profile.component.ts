@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } 
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { NotificationService, NotificationSettings } from '../../core/services/notification.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-profile',
     standalone: true,
-    imports: [ReactiveFormsModule, CommonModule, FormsModule],
+    imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })

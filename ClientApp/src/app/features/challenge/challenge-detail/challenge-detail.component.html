@@ -1,21 +1,44 @@
 <div class="detail-container" *ngIf="challenge">
     <div class="header">
+        <div class="top-nav">
+            <a routerLink="/dashboard" class="back-link">← Back</a>
+            <div class="actions" *ngIf="isOwner">
+                <!-- Screenshot only shows Delete, but Edit is useful. I'll keep them but style them similarly -->
+                <button class="action-btn share" (click)="openShareModal()">🔗 Share</button>
+                <button class="action-btn edit" [routerLink]="['/challenges/edit', challenge.id]">✎ Edit</button>
+                <button class="action-btn delete" (click)="deleteChallenge()">Delete</button>
+            </div>
+        </div>
+
         <div class="title-section">
             <h1>{{ challenge.title }}</h1>
             <p>{{ challenge.goalDescription }}</p>
-            <div class="actions">
-                <button class="action-btn edit" [routerLink]="['/challenges/edit', challenge.id]">✎ Edit</button>
-                <button class="action-btn delete" (click)="deleteChallenge()">🗑 Delete</button>
-            </div>
         </div>
-        <div class="stats-overview">
-            <div class="big-stat">
+
+        <div class="stats-grid">
+            <div class="stat-card">
                 <span class="value">{{ (challenge.completedDays / days.length) * 100 | number:'1.0-0' }}%</span>
-                <span class="label">Complete</span>
+                <span class="label">Completed</span>
             </div>
-            <div class="big-stat highlight">
-                <span class="value">{{ challenge.currentStreak }}</span>
-                <span class="label">Day Streak</span>
+            <div class="stat-card highlight">
+                <span class="value">🔥 {{ challenge.currentStreak }}</span>
+                <span class="label">Current Streak</span>
+            </div>
+            <div class="stat-card">
+                <span class="value">{{ bestStreak }}</span>
+                <span class="label">Best Streak</span>
+            </div>
+            <div class="stat-card">
+                <span class="value">{{ challenge.completedDays }}</span>
+                <span class="label">Done</span>
+            </div>
+            <div class="stat-card">
+                <span class="value">{{ daysSkipped }}</span>
+                <span class="label">Skipped</span>
+            </div>
+            <div class="stat-card">
+                <span class="value">{{ daysRemaining }}</span>
+                <span class="label">Remaining</span>
             </div>
         </div>
     </div>
@@ -70,7 +93,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="save-btn" (click)="saveDay()">Save Changes</button>
+                <button class="save-btn" *ngIf="isOwner" (click)="saveDay()">Save Changes</button>
             </div>
         </div>
     </div>
@@ -79,9 +102,39 @@
     <div class="modal-overlay celebration-overlay" *ngIf="showCelebrationModal" (click)="closeModal()">
         <div class="modal-content celebration-content" (click)="$event.stopPropagation()">
             <h2>🎉 Congratulations! 🎉</h2>
-            <p>You have completed the <strong>{{ challenge?.title }}</strong> challenge!</p>
+            <p>You have completed the <strong>{{ challenge.title }}</strong> challenge!</p>
             <p class="quote">"{{ celebrationQuote }}"</p>
             <button class="save-btn" (click)="closeModal()">Awesome!</button>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal-overlay" *ngIf="showShareModal" (click)="closeShareModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h3>Share Challenge</h3>
+                <button class="close-btn" (click)="closeShareModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="hint">Friends can view your progress but cannot edit it.</p>
+                <div class="friends-list">
+                    <div *ngFor="let friend of friends" class="friend-item">
+                        <div class="friend-info">
+                            <img [src]="friend.avatar || 'assets/default-avatar.png'" alt="Avatar" class="avatar-small">
+                            <span>{{ friend.fullName }}</span>
+                        </div>
+                        <div class="action">
+                            <button *ngIf="!isViewer(friend.friendId)" class="share-btn"
+                                (click)="shareWithFriend(friend.friendId)">Share</button>
+                            <button *ngIf="isViewer(friend.friendId)" class="remove-btn"
+                                (click)="removeViewer(friend.friendId)">Remove</button>
+                        </div>
+                    </div>
+                    <div *ngIf="friends.length === 0" class="empty-state">
+                        You have no friends yet. Add friends to share!
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -71,22 +71,21 @@ $glass-blur: blur(12px);
     box-shadow: var(--card-shadow);
     border: 1px solid var(--border-color);
 
-    @media (max-width: 600px) {
-        padding: 2rem 1.5rem;
-        max-width: 90%;
-    }
-
     // Glassmorphism overrides
     background: var(--card-bg);
     /* Fallback */
     background: color-mix(in srgb, var(--card-bg), transparent 10%); // Premium Glass Effect
 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @media (max-width: 600px) {
+        padding: 2rem 1.5rem;
+        max-width: 90%;
+    }
+
     @media (min-width: 768px) {
         backdrop-filter: blur(10px);
     }
-
-    transition: transform 0.3s ease,
-    box-shadow 0.3s ease;
 
     &:hover {
         transform: translateY(-5px);

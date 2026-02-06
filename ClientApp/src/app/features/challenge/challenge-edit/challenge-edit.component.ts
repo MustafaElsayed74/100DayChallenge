@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ChallengeService } from '../../../core/services/challenge.service';
+import { FriendService, FriendDto } from '../../../core/services/friend.service';
 
 @Component({
     selector: 'app-challenge-edit',
@@ -20,8 +21,13 @@ export class ChallengeEditComponent implements OnInit {
     };
     loading = true;
 
+    viewers: any[] = [];
+    friends: FriendDto[] = [];
+    selectedFriendId: string = '';
+
     constructor(
         private challengeService: ChallengeService,
+        private friendService: FriendService,
         private router: Router,
         private route: ActivatedRoute
     ) { }
@@ -31,6 +37,8 @@ export class ChallengeEditComponent implements OnInit {
         if (id) {
             this.challengeId = +id;
             this.loadChallenge(this.challengeId);
+            this.loadViewers();
+            this.loadFriends();
         }
     }
 
@@ -48,6 +56,39 @@ export class ChallengeEditComponent implements OnInit {
                 alert('Could not load challenge');
                 this.router.navigate(['/']);
             }
+        });
+    }
+
+    loadViewers() {
+        this.challengeService.getViewers(this.challengeId).subscribe({
+            next: (res) => this.viewers = res,
+            error: (err) => console.error('Error loading viewers', err)
+        });
+    }
+
+    loadFriends() {
+        this.friendService.getFriends().subscribe({
+            next: (res) => this.friends = res,
+            error: (err) => console.error('Error loading friends', err)
+        });
+    }
+
+    addViewer() {
+        if (!this.selectedFriendId) return;
+        this.challengeService.addViewer(this.challengeId, this.selectedFriendId).subscribe({
+            next: () => {
+                this.selectedFriendId = '';
+                this.loadViewers();
+            },
+            error: (err) => alert(err.error?.message || 'Failed to add viewer')
+        });
+    }
+
+    removeViewer(userId: string) {
+        if (!confirm('Remove this viewer?')) return;
+        this.challengeService.removeViewer(this.challengeId, userId).subscribe({
+            next: () => this.loadViewers(),
+            error: (err) => alert(err.error?.message || 'Failed to remove viewer')
         });
     }
 

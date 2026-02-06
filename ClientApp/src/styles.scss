@@ -6,6 +6,21 @@
 }
 
 :root {
+    /* Dark Theme by Default */
+    --bg-color: #0b0e14;
+    --text-color: #e6edf3;
+    --card-bg: #161b22;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --border-color: #30363d;
+    --input-bg: #0d1117;
+    --primary-color: #ff3358;
+    --primary-text: #ffffff;
+    --highlight-color: #ff3358;
+    --secondary-text: #8b949e;
+}
+
+body.light-theme {
+    /* Optional Light Theme */
     --bg-color: #f8f9fa;
     --text-color: #333;
     --card-bg: #ffffff;
@@ -15,18 +30,6 @@
     --primary-color: #212121;
     --primary-text: #ffffff;
     --highlight-color: #4CAF50;
-}
-
-body.dark-theme {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --card-bg: #1e1e1e;
-    --card-shadow: rgba(0, 0, 0, 0.5);
-    --border-color: #333;
-    --input-bg: #2d2d2d;
-    --primary-color: #4CAF50;
-    /* Green primary in dark mode looks good */
-    --primary-text: #ffffff;
 }
 
 body {

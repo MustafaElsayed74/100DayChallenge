@@ -22,6 +22,26 @@
                 <textarea id="notes" name="notes" [(ngModel)]="model.notes" rows="2"></textarea>
             </div>
 
+            <div class="form-group viewers-section">
+                <h3>Manage Viewers</h3>
+                <div class="add-viewer">
+                    <select [(ngModel)]="selectedFriendId" name="selectedFriend" class="viewer-select">
+                        <option value="" disabled>Select a friend to invite</option>
+                        <option *ngFor="let friend of friends" [value]="friend.friendId">{{ friend.fullName }}</option>
+                    </select>
+                    <button type="button" (click)="addViewer()" [disabled]="!selectedFriendId"
+                        class="add-btn">Add</button>
+                </div>
+
+                <div class="viewers-list" *ngIf="viewers.length > 0">
+                    <div *ngFor="let viewer of viewers" class="viewer-item">
+                        <span>{{ viewer.fullName }}</span>
+                        <button type="button" (click)="removeViewer(viewer.userId)" class="remove-btn">×</button>
+                    </div>
+                </div>
+                <div *ngIf="viewers.length === 0" class="no-viewers">No viewers yet.</div>
+            </div>
+
             <div class="actions">
                 <button type="submit" [disabled]="!challengeForm.form.valid" class="submit-btn">
                     Save Changes
