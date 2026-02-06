@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
         <a routerLink="/friends" routerLinkActive="active" class="nav-link">Friends</a>
         
         <div class="user-display">
-            <span class="user-name">{{ user.fullName || user.userName }}</span>
+            <span class="user-name">{{ user.fullName || user.email }}</span>
         </div>
         
         <button class="logout-btn" (click)="auth.logout()">Logout</button>
