@@ -8,6 +8,7 @@ export interface User {
   email: string;
   fullName: string;
   avatar?: string;
+  userName?: string;
   token: string;
   userId: string;
 }
@@ -76,6 +77,7 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify({
       email: user.email,
       fullName: user.fullName,
+      userName: user.userName,
       avatar: user.avatar,
       userId: user.userId
     }));

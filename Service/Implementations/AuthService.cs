@@ -68,7 +68,8 @@ namespace Service.Implementations
             {
                 FullName = user.FullName,
                 Email = user.Email,
-                Avatar = user.Avatar
+                Avatar = user.Avatar,
+                UserName = user.UserName // Return username
             };
         }
 
@@ -80,14 +81,27 @@ namespace Service.Implementations
             user.FullName = dto.FullName;
             user.Avatar = dto.Avatar;
 
+            // Handle Username change
+            if (!string.IsNullOrWhiteSpace(dto.UserName) && user.UserName != dto.UserName)
+            {
+                var existingUser = await _userManager.FindByNameAsync(dto.UserName);
+                if (existingUser != null && existingUser.Id != userId)
+                {
+                    throw new Exception("Username is already taken");
+                }
+                user.UserName = dto.UserName;
+                user.NormalizedUserName = dto.UserName.ToUpper();
+            }
+
             var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded) throw new Exception("Failed to update profile");
+            if (!result.Succeeded) throw new Exception("Failed to update profile: " + string.Join(", ", result.Errors.Select(e => e.Description)));
 
             return new UserDetailDto
             {
                 FullName = user.FullName,
                 Email = user.Email,
-                Avatar = user.Avatar
+                Avatar = user.Avatar,
+                UserName = user.UserName
             };
         }
 

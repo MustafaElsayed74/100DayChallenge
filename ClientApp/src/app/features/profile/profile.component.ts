@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit {
     ) {
         this.profileForm = this.fb.group({
             fullName: ['', Validators.required],
+            userName: ['', Validators.required],
             avatar: ['']
         });
 
@@ -97,6 +98,7 @@ export class ProfileComponent implements OnInit {
             next: (user) => {
                 this.profileForm.patchValue({
                     fullName: user.fullName,
+                    userName: user.userName,
                     avatar: user.avatar
                 });
             },
