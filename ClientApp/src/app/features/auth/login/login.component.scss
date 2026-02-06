@@ -63,146 +63,118 @@
 .auth-card {
   position: relative;
   z-index: 1;
-  background: var(--card-bg);
-  padding: 3.5rem 3rem;
-  border-radius: 24px;
+  background: #161b22;
+  padding: 3rem;
+  border-radius: 12px;
   width: 100%;
-  max-width: 420px;
-  box-shadow: var(--card-shadow);
-  border: 1px solid var(--border-color);
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid #30363d;
 
-  /* Subtle glass effect using theme colors */
-  background: linear-gradient(145deg, rgba(22, 27, 34, 0.9), rgba(22, 27, 34, 0.95));
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 
   @media (max-width: 600px) {
     padding: 2rem 1.5rem;
     max-width: 90%;
   }
 
-  /* Glass blur */
-  @media (min-width: 768px) {
-    backdrop-filter: blur(10px);
-  }
-
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px var(--card-shadow);
-    border-color: var(--highlight-color);
+    transform: translateY(-2px);
+    border-color: #58a6ff;
   }
 
   .header {
-    text-align: center;
-    margin-bottom: 3rem;
+    text-align: left;
+    margin-bottom: 2rem;
 
     h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-color);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
       margin-bottom: 0.5rem;
-      letter-spacing: -0.5px;
     }
 
     .subtitle {
-      color: var(--text-color);
-      opacity: 0.7;
-      font-size: 1.1rem;
+      color: #8b949e;
+      font-size: 0.95rem;
     }
   }
 }
 
-// Floating Label Inputs
-.form-group.floating-label {
-  position: relative;
-  margin-bottom: 1.8rem;
+// Floating Label Inputs -> Now Static
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  text-align: left;
+
+  label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
 
   input {
     width: 100%;
-    padding: 1.2rem 1rem 0.8rem;
+    padding: 0.9rem 1rem;
     font-size: 1rem;
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    background: #0d1117;
+    /* Very dark input bg */
+    border: 1px solid #30363d;
+    /* Subtle border */
+    border-radius: 6px;
+    /* Smaller radius */
     color: var(--text-color);
     transition: all 0.2s ease;
 
     &:focus {
       outline: none;
-      border-color: var(--highlight-color);
-      box-shadow: 0 0 0 3px rgba(255, 51, 88, 0.1);
+      border-color: #58a6ff;
+      /* GitHub-like blue focus */
+      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
     }
 
-    &:not(:placeholder-shown) {
-      background-color: var(--input-bg);
-    }
-
-    // Hide default placeholder
     &::placeholder {
-      color: transparent;
+      color: #8b949e;
+      opacity: 0.5;
     }
-  }
-
-  label {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    padding: 0 0.4rem;
-    color: var(--text-color);
-    opacity: 0.6;
-    pointer-events: none;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-    background: transparent;
-    border-radius: 4px;
-  }
-
-  // Float label when focus or has value
-  input:focus+label,
-  input:not(:placeholder-shown)+label {
-    top: -0.6rem;
-    left: 0.8rem;
-    font-size: 0.8rem;
-    opacity: 1;
-    color: var(--highlight-color);
-    background: var(--card-bg);
-    font-weight: 600;
   }
 }
 
 .submit-btn {
   width: 100%;
-  padding: 1.2rem;
-  background: var(--primary-color);
-  color: var(--primary-text);
+  padding: 0.9rem;
+  background: #ff3358;
+  /* Pink */
+  color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
 
   .arrow {
-    transition: transform 0.3s ease;
+    display: none;
+    /* Screenshot doesn't show arrow usually, but I'll keep it or hide it. Hiding for clean look. */
   }
 
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-
-    .arrow {
-      transform: translateX(5px);
-    }
+    background: #e62e4d;
+    transform: translateY(-1px);
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    background: #30363d;
   }
 }
 
