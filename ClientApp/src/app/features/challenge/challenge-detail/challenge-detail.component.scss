@@ -343,18 +343,27 @@
 
 .status-options {
     display: flex;
-    gap: 10px;
+    flex-wrap: wrap;
+    /* Allow wrapping if needed, but try to keep row */
+    gap: 8px;
+    /* Reduced gap */
 
     .option {
-        flex: 1;
-        padding: 10px;
+        flex: 1 1 80px;
+        /* Min width 80px */
+        padding: 8px 4px;
+        /* Reduced side padding */
         border: 1px solid var(--border-color);
         border-radius: 8px;
         text-align: center;
         cursor: pointer;
         font-weight: 500;
+        font-size: 0.9rem;
+        /* Slightly smaller text */
         transition: all 0.2s;
         color: var(--text-color);
+        white-space: nowrap;
+        /* Prevent text wrap inside button */
 
         input {
             display: none;
@@ -384,6 +393,7 @@
     }
 }
 
+
 .save-btn {
     width: 100%;
     padding: 1rem;
@@ -393,6 +403,9 @@
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
+    margin-top: 10px;
+    position: relative;
+    z-index: 10;
 
     &:hover {
         transform: translateY(-2px);

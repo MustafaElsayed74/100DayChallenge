@@ -219,7 +219,7 @@ namespace Service.Implementations
             
             challenge.Title = dto.Title;
             challenge.GoalDescription = dto.GoalDescription;
-            // challenge.Notes = dto.Notes; // I'll skip Notes for now to be safe, or check later. 
+            challenge.Notes = dto.Notes; 
             // Providing the code with Title and GoalDescription which are verified.
             
              _unitOfWork.Repository<Challenge>().Update(challenge);
