@@ -47,6 +47,7 @@ namespace Service.DTOs
         public int SkippedDays { get; set; }
         public int CurrentStreak { get; set; }
         public string OwnerId { get; set; }
+        public string OwnerName { get; set; }
     }
 
     public class ChallengeDetailDto : ChallengeDto

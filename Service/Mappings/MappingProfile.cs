@@ -14,9 +14,11 @@ namespace Service.Mappings
             CreateMap<CreateChallengeDto, Challenge>();
             
             CreateMap<Challenge, ChallengeDto>()
-                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId));
+                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.User.FullName));
             CreateMap<Challenge, ChallengeDetailDto>()
-                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId));
+                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.User.FullName));
             
             CreateMap<ChallengeDay, ChallengeDayDto>();
         }

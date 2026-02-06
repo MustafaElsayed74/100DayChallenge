@@ -155,5 +155,24 @@
             color: #4CAF50;
             border: 1px solid rgba(76, 175, 80, 0.3);
         }
+
+        &.friend {
+            background: rgba(33, 150, 243, 0.15);
+            color: #2196F3;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    }
+}
+
+.challenge-card.friend-challenge {
+    border-color: rgba(33, 150, 243, 0.5);
+    background: linear-gradient(145deg, var(--card-bg), rgba(33, 150, 243, 0.05));
+
+    &:hover {
+        border-color: #2196F3;
+        box-shadow: 0 8px 25px rgba(33, 150, 243, 0.15);
     }
 }

@@ -5,10 +5,14 @@
     </div>
 
     <div class="grid">
-        <div *ngFor="let challenge of challenges" class="challenge-card" [routerLink]="['/challenge', challenge.id]">
+        <div *ngFor="let challenge of challenges" class="challenge-card"
+            [class.friend-challenge]="isFriendChallenge(challenge)" [routerLink]="['/challenge', challenge.id]">
             <div class="card-header">
-                <h3>{{ challenge.title }}</h3>
-                <span class="badge active">Active</span>
+                <div class="header-top">
+                    <h3>{{ challenge.title }}</h3>
+                    <span *ngIf="isFriendChallenge(challenge)" class="badge friend">👤 {{ challenge.ownerName }}</span>
+                    <span *ngIf="!isFriendChallenge(challenge)" class="badge active">Active</span>
+                </div>
             </div>
 
             <p class="description">{{ challenge.goalDescription }}</p>

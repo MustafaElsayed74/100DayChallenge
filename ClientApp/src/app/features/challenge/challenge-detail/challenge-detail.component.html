@@ -2,6 +2,11 @@
     <div class="header">
         <div class="top-nav">
             <a routerLink="/dashboard" class="back-link">← Back</a>
+
+            <div class="friend-banner" *ngIf="!isOwner && challenge.ownerName">
+                👀 Viewing {{ challenge.ownerName }}'s Challenge
+            </div>
+
             <div class="actions" *ngIf="isOwner">
                 <!-- Screenshot only shows Delete, but Edit is useful. I'll keep them but style them similarly -->
                 <button class="action-btn share" (click)="openShareModal()">🔗 Share</button>

@@ -29,6 +29,16 @@
             }
         }
 
+        .friend-banner {
+            background: rgba(33, 150, 243, 0.15);
+            color: #2196F3;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
         .actions {
             display: flex;
             gap: 10px;
@@ -96,7 +106,31 @@
         }
 
         @media (max-width: 600px) {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+
+            .stat-card {
+                padding: 0.8rem 0.5rem;
+                min-height: 80px;
+
+                .stat-content {
+                    .value {
+                        font-size: 1.2rem;
+                        margin-bottom: 2px;
+                    }
+
+                    .label {
+                        font-size: 0.6rem;
+                        letter-spacing: 0.5px;
+                    }
+                }
+
+                .icon-bg {
+                    font-size: 2.5rem;
+                    top: -5px;
+                    right: -5px;
+                }
+            }
         }
 
         .stat-card {

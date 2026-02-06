@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChallengeService, Challenge } from '../../../core/services/challenge.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,13 +13,22 @@ import { RouterModule } from '@angular/router';
 })
 export class ChallengeListComponent implements OnInit {
     challenges: Challenge[] = [];
+    currentUserId: string = '';
 
-    constructor(private challengeService: ChallengeService) { }
+    constructor(private challengeService: ChallengeService, private authService: AuthService) { }
 
     ngOnInit() {
+        this.authService.user$.subscribe(user => {
+            if (user) this.currentUserId = user.userId;
+        });
+
         this.challengeService.getChallenges().subscribe(data => {
             this.challenges = data;
         });
+    }
+
+    isFriendChallenge(challenge: Challenge): boolean {
+        return !!challenge.ownerId && challenge.ownerId !== this.currentUserId;
     }
 
     getProgress(challenge: Challenge): number {

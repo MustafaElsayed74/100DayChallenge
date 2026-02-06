@@ -15,6 +15,7 @@ export interface Challenge {
     currentStreak: number;
     days?: ChallengeDay[];
     ownerId?: string;
+    ownerName?: string;
 }
 
 export interface ChallengeDay {
