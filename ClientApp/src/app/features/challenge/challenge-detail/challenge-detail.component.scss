@@ -106,12 +106,14 @@
         }
 
         @media (max-width: 600px) {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(2, 1fr);
+            /* Back to 2 cols for text space */
+            gap: 10px;
 
             .stat-card {
                 padding: 0.8rem 0.5rem;
                 min-height: 80px;
+                /* Keep compact height */
 
                 .stat-content {
                     .value {
@@ -216,6 +218,8 @@
                     /* Special glow for streak */
                     box-shadow: 0 4px 20px rgba(255, 51, 88, 0.15);
                     border: 1px solid rgba(255, 51, 88, 0.3);
+                    border-bottom: 3px solid #ff3358;
+                    /* Re-apply thick bottom border */
                 }
             }
 
